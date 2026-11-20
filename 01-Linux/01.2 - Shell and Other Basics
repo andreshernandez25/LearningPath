@@ -1,0 +1,36 @@
+#1. Command Path in Shell
+
+En vez de colocar el path de un ejecutable, gracias a la variable PATH no hace falta colocarlo y permite colocar comandos directamente en Bash.
+
+Ejemplo:
+
+En vez de /bin/ls, simplemente se coloca ls.
+
+#2. Variables de Entorno
+
+Son las que guardan datos dentro del terminal y le dicen al sistema y programa como comportarse.
+
+Son en pares (nombre-valor), dinamicas dado que se puede modificar o crear nuevas y afectan los procesos dado que los programas leen dichas variables para ver como actuar.
+
+HOME -> /home/usuario
+PATH -> /usr/bin:
+TERM -> xterm-256color
+EDITOR -> vim
+
+A nivel de ariquticetura son un arreglo de cadenas de texto que están en la memoria de cada proceso, que se hereda de los padres y para que una
+variable pase realmente a los procesos hijos, debes usar export (ej. export MI_VAR=valor). Si no, se queda atrapada solo en la terminal actual.
+
+#3. Command Help
+
+man comando
+comando --help
+
+#4 Redirects
+
+> Envia la salida a un archivo (redirect)
+>> Adicionla la salida a un archivo (append)
+< Redirige la entrada a un archivo (redirect input)
+
+#5 Super User
+
+Es el conocido root. Para tener ese privilegio se usa sudo cuando se está como usuario.  Se usa sudo reducir el riesgo de potenciales accidentes.
