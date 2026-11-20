@@ -1,1 +1,75 @@
 
+# Guía Rápida de Comandos en Vim
+
+Resumen de comandos esenciales organizados por acción para consulta rápida.
+
+---
+
+## Archivos y Sesión
+
+| Comando | Acción |
+| :--- | :--- |
+| `vim <archivo>` | Abrir o crear un archivo en Vim |
+| `:w` | Guardar cambios sin salir |
+| `:wq` | Guardar cambios y salir |
+| `:q!` | Salir descartando todos los cambios |
+
+---
+
+## Navegación y Movimiento
+
+| Comando | Acción |
+| :--- | :--- |
+| `h` / `j` / `k` / `l` | Mover el cursor: izquierda / abajo / arriba / derecha |
+| `0` | Ir al inicio de la línea actual |
+| `$` | Ir al final de la línea actual |
+| `gg` | Ir al inicio del archivo |
+| `G` | Ir al final del archivo |
+| `2w` | Repetir un movimiento *N* veces (ej. avanzar 2 palabras) |
+
+---
+
+## Inserción y Edición de Texto
+
+| Comando | Acción |
+| :--- | :--- |
+| `i` | Insertar texto antes del cursor |
+| `a` | Insertar texto después del cursor (`A` inserta al final de la línea) |
+| `x` | Borrar el carácter bajo el cursor |
+| `dw` | Borrar desde el cursor hasta el inicio de la siguiente palabra |
+| `d$` | Borrar desde el cursor hasta el final de la línea |
+| `dd` | Borrar (cortar) la línea completa |
+
+---
+
+## Copiar, Pegar y Selección
+
+| Comando | Acción |
+| :--- | :--- |
+| `yy` | Copiar (*yank*) toda la línea actual |
+| `p` | Pegar la última línea copiada o borrada con `dd` |
+| `ggVG` | Seleccionar todo el contenido del archivo (Modo Visual) |
+| `Ctrl + Shift + V` | Pegar texto desde el portapapeles en la línea de comandos (`:`) |
+
+---
+
+## Deshacer y Rehacer
+
+| Comando | Acción |
+| :--- | :--- |
+| `u` | Deshacer la última acción |
+| `U` | Deshacer todos los cambios en la línea actual |
+| `Ctrl + r` | Rehacer (*redo*) una acción deshecha |
+
+---
+
+## Búsqueda, Reemplazo y Regex
+
+| Comando | Acción |
+| :--- | :--- |
+| `/<texto>` | Buscar `<texto>` hacia adelante en el archivo |
+| `:%s/\<vieja\>/nueva` | Reemplazar la **primera** coincidencia exacta en cada línea |
+| `:%s/\<vieja\>/nueva/g` | Reemplazar **todas** las coincidencias exactas en todo el archivo |
+| `:g/^línea_exacta$/d` | Eliminar todas las líneas que coincidan exactamente |
+| `^` | *(Regex)* Indica el **inicio** de una línea |
+| `$` | *(Regex)* Indica el **final** de una línea |
