@@ -1,0 +1,52 @@
+# 🐧 Notas de Estudio Bash: Archivos, Enlaces, Permisos y Empaquetado
+
+Resumen práctico de los comandos de Linux practicados en laboratorio para la gestión de archivos, enlaces del sistema de archivos, control de permisos/propietarios y empaquetado/compresión.
+
+---
+
+## 1. Copiado, Renombrado y Movimiento de Archivos
+
+* `cp <origen> <destino>`: Copia un archivo de una ubicación a otra.
+* `cp -r <dir_origen> <dir_destino>`: Copia de forma recursiva un directorio completo junto con todo su contenido.
+* `cp -r <dir_origen>/. <dir_destino>`: Copia **únicamente el contenido** interno de `<dir_origen>` sin anidar la carpeta raíz dentro del destino.
+* `mv <origen> <destino>`: Mueve un archivo o directorio a una nueva ruta, o lo renombra si el origen y el destino comparten el mismo directorio.
+
+---
+
+## 2. Enlaces Blandos (Simbólicos) y Enlaces Duros
+
+* `ln -s <objetivo> <nombre_enlace>`: Crea un **enlace simbólico (soft link)**. Funciona como un acceso directo que apunta a la ruta de un archivo o directorio y posee su propio número de inodo.
+* `ln <objetivo> <nombre_enlace>`: Crea un **enlace duro (hard link)** (solo para archivos). Apunta directamente al **mismo inodo** en disco que el archivo original; si se borra el archivo original, los datos siguen intactos y accesibles a través del enlace duro.
+* `ls -li <ruta>`: Lista los archivos con detalles extendidos (`-l`) y muestra su **número de inodo** (`-i`), permitiendo verificar si dos nombres comparten el mismo inodo (hard link) o tienen inodos distintos (soft link).
+
+---
+
+## 3. Permisos de Archivos y Propietarios
+
+* `chmod <modo> <archivo>`: Modifica los permisos de lectura (`r`), escritura (`w`) y ejecución (`x`).
+  * **Modo numérico (octal):**
+    * `chmod 600 <archivo>`: Propietario con lectura y escritura (`rw-`), grupo y otros sin acceso (`---`).
+    * `chmod 760 <archivo>`: Propietario con control total (`rwx`), grupo con lectura y escritura (`rw-`), otros sin acceso (`---`).
+  * **Modo simbólico:** Utiliza `u` (propietario), `g` (grupo), `o` (otros), `+` (añadir), `-` (quitar) junto con `r`, `w`, `x`. Ejemplos: `chmod u+x <archivo>`, `chmod o-x <archivo>`, `chmod u-r <archivo>`, `chmod -w <archivo>`.
+* `sudo chown <usuario>:<grupo> <archivo>`: Cambia el usuario y grupo propietario de un archivo o carpeta (requiere privilegios elevados para transferir propiedad a usuarios como `root`).
+* `ls -l <archivo>`: Muestra los permisos, contador de enlaces, propietario, grupo, tamaño, fecha de modificación y nombre para auditar cambios de seguridad.
+
+---
+
+## 4. Empaquetado y Compresión
+
+### Gestión de paquetes con `tar`
+
+| Comando | Acción |
+| :--- | :--- |
+| `tar -cf <archivo.tar> <objetivo>` | Crea (`-c`) un archivo empaquetado sin comprimir (`-f`). |
+| `tar -czf <archivo.tar.gz> <objetivo>` | Empaqueta y comprime usando **gzip** (`-z`). |
+| `tar -cjvf <archivo.tar.bz2> <objetivo>` | Empaqueta y comprime usando **bzip2** (`-j`) mostrando el progreso (`-v`). |
+| `tar -tzvf <archivo.tar.gz>` | Lista (`-t`) el contenido interno de un paquete comprimido sin extraerlo en disco. |
+| `tar -xf <archivo.tar> -C <ruta_destino>` | Extrae (`-x`) el contenido del paquete directamente dentro de otro directorio (`-C`). |
+| `--exclude='<patrón>'` | Excluye archivos o carpetas específicas durante la creación de un archivo `tar`. |
+
+### Compresión individual y formato ZIP
+* `gzip <archivo>`: Comprime un único archivo reemplazándolo por `<archivo>.gz`.
+* `gunzip <archivo.gz>` (o `gzip -d <archivo.gz>`): Descomprime un archivo `.gz` devolviéndolo a su estado original.
+* `zip -r <archivo.zip> <objetivo>`: Empaqueta y comprime de forma recursiva (`-r`) archivos y directorios en formato `.zip`.
